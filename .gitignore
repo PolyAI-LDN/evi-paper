@@ -1,0 +1,23 @@
+*.pem
+*.pfx
+*.pyc
+*.so
+*.swp
+*.swo
+*.log
+*.model
+.env
+*.tfrecords
+__pycache__
+*.iml
+.idea/
+*.egg-info
+*.tgz
+.ipynb*
+.DS_Store
+
+# files containing ".ignore"
+**/*.ignore.*
+
+tmp/
+.vscode/
