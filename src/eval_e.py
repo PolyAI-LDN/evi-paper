@@ -14,8 +14,7 @@ import glog
 
 from enrolment import EnrolmentEvaluator, EnrolmentPolicy, build_model_e
 from nlu import build_nlu
-from data_types import Slot
-from readers import read_evi_data
+from evi_dataset import DEFAULT_SLOT_ORDER, read_evi_data
 
 
 def parse_args():
@@ -49,12 +48,12 @@ def parse_args():
 
 def _main():
     args = parse_args()
+    slot_order = DEFAULT_SLOT_ORDER
     #
     scenario_id2profile, dialogue_id2turns = read_evi_data(locale=args.locale)
     print(f'Read {len(scenario_id2profile)} profiles')
     print(f'Read {len(dialogue_id2turns)} dialogues')
 
-    slot_order = [Slot.POSTCODE, Slot.NAME, Slot.DOB]
     policy_e = EnrolmentPolicy(
         nlu=build_nlu(name=args.nlu, locale=args.locale),
         enroller=build_model_e(name=args.model),
@@ -84,4 +83,4 @@ def _main():
 
 if __name__ == '__main__':
     _main()
-    glog.info("Done!")
+    glog.info("Finished Enrolment Experiment!")

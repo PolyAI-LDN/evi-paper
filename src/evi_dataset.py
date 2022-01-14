@@ -13,10 +13,12 @@ from typing import Dict, List, Optional
 
 import glog
 
-from data_types import Profile, Turn
+from data_types import Profile, Slot, Turn
 
 
 _DATA_DIR = "../data"
+
+DEFAULT_SLOT_ORDER = [Slot.POSTCODE, Slot.NAME, Slot.DOB]
 
 
 def _read_dialogues(
