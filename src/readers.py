@@ -15,7 +15,8 @@ from typing import Dict, List, Optional
 
 import glog
 
-_DATA_DIR = "../tmp/evi"
+
+_DATA_DIR = "../data"
 
 
 class Slot:
@@ -99,7 +100,6 @@ def read_dialogues(
     input_file: str,
 ) -> Dict[str, List[Turn]]:
     """ Read dialogue data """
-    is_viasat = 'viasat' in input_file
     dialogue_id2turns = defaultdict(list)
     n_multiple_targets = 0
     n_no_targets = 0
@@ -111,16 +111,6 @@ def read_dialogues(
                 nbest = [x for x in json.loads(dictrow['nbest']) if x]
             except json.decoder.JSONDecodeError:
                 nbest = literal_eval(dictrow.get('nbest', '[]'))
-            if is_viasat:
-                # skip viasat non-item collection turns
-                if dictrow.get('item', 'N/A') == 'start':
-                    continue
-                if any(
-                    t.lower() in {
-                        'yes', 'no', 'yeah', 'correct', "that's correct"
-                    } for t in nbest
-                ):
-                    continue
             dialogue_id = dictrow['dialogue_id']
             scenario_id = dictrow['scenario_id']
             if scenario_id.startswith('['):
@@ -215,27 +205,10 @@ def filter_turns(
 
 def _main():
     """ demo """
-    is_viasat = True
     lang_code = 'en'
     #
-    if is_viasat:
-        profiles_file = os.path.join(
-            _DATA_DIR, 'viasat',
-            f"viasat.records.{lang_code}.csv"
-        )
-        dialogues_file = os.path.join(
-            _DATA_DIR, 'viasat',
-            f"viasat.dialogues.{lang_code}.tsv"
-        )
-    else:
-        profiles_file = os.path.join(
-            _DATA_DIR, 'dataset',
-            f"records.{lang_code}.csv"
-        )
-        dialogues_file = os.path.join(
-            _DATA_DIR, 'dataset',
-            f"dialogues.{lang_code}.tsv"
-        )
+    profiles_file = os.path.join(_DATA_DIR, f"records.{lang_code}.csv")
+    dialogues_file = os.path.join(_DATA_DIR, f"dialogues.{lang_code}.tsv")
     #
     scenario_id2profile = read_profiles(profiles_file)
     print(f'Loaded {len(scenario_id2profile)} profiles')
