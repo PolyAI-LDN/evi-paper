@@ -20,6 +20,7 @@ def build_model_i(name: str, locale: str) -> BaseIdentificationModel:
     Returns:
         an identification model
     """
+    locale = locale.replace("_", "-")
     if name in {"oracle"}:
         # load a dummy model - will not be used
         name = "exact-1"

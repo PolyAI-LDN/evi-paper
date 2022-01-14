@@ -8,7 +8,7 @@ from typing import Dict, List
 import numpy as np
 from sklearn.metrics import accuracy_score
 
-from readers import Profile, Turn
+from data_types import Profile, Turn
 from utils.math_ops import safe_div
 
 

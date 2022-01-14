@@ -8,7 +8,7 @@ from typing import List, Optional, Tuple
 import glog
 
 from nlu import Nlu
-from readers import Profile, Turn, filter_turns
+from data_types import Profile, Turn, filter_turns
 from verification.models.base import BaseVerificationModel
 
 

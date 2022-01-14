@@ -9,7 +9,7 @@ from typing import List, Tuple
 from nlu.dates import EviDateParser
 from nlu.names import EviNameParser
 from nlu.postcodes import EviPostcodeParser
-from readers import Slot, Turn
+from data_types import Slot, Turn
 
 
 @dataclass

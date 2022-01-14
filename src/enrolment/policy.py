@@ -8,7 +8,7 @@ import glog
 
 from enrolment.models.base import BaseEnrolmentModel
 from nlu import Nlu
-from readers import Profile, Turn, filter_turns
+from data_types import Profile, Turn, filter_turns
 
 
 class EnrolmentPolicy(object):

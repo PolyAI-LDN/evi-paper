@@ -7,11 +7,9 @@ from collections import defaultdict
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
 
-import matplotlib.pyplot as plt
 import numpy as np
-from sklearn.metrics import accuracy_score, det_curve
 
-from readers import Profile, Turn
+from data_types import Profile
 from utils.math_ops import calc_f1, safe_div
 
 

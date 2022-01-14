@@ -8,7 +8,7 @@ import abc
 from dataclasses import dataclass
 
 from nlu import NluOutput
-from readers import Profile
+from data_types import Profile
 
 
 class BaseVerificationModel(abc.ABC):

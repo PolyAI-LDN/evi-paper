@@ -10,7 +10,7 @@ from dataclasses import dataclass, field
 from typing import Dict
 
 from nlu import NluOutput
-from readers import Profile
+from data_types import Profile
 
 
 class BaseEnrolmentModel(abc.ABC):

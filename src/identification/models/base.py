@@ -9,7 +9,7 @@ from dataclasses import dataclass
 from typing import List
 
 from nlu import NluOutput
-from readers import Profile
+from data_types import Profile
 
 
 class BaseIdentificationModel(abc.ABC):

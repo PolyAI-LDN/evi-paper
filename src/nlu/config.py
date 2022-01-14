@@ -20,6 +20,7 @@ def build_nlu(name: str, locale: str) -> Nlu:
     Returns:
         an NLU model
     """
+    locale = locale.replace("_", "-")
     if name == 'risk_averse':
         return Nlu(
             postcode_parser=EviPostcodeParser(

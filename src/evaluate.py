@@ -9,7 +9,6 @@ Copyright PolyAI Limited
 """
 
 import argparse
-import os
 from collections import defaultdict
 from typing import Dict, List
 
@@ -22,7 +21,8 @@ from identification import (
     build_model_i
 )
 from nlu import build_nlu
-from readers import Profile, Slot, Turn, read_dialogues, read_profiles
+from data_types import Profile, Slot, Turn
+from readers import read_evi_data
 from verification import (
     VerificationEvaluator, VerificationPolicy, build_model_v
 )
@@ -87,7 +87,7 @@ def _main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '--locale', type=str, default='en_GB',
-        choices={"en_GB", "pl_PL", "fr_FR", "el_GR"},
+        choices={"en_GB", "pl_PL", "fr_FR"},
         help='Locale to evaluate'
     )
     parser.add_argument(
@@ -155,26 +155,16 @@ def _main():
     #
     if not (args.enrolment or args.identification or args.verification):
         parser.error('Not specified task to evaluate; add: [-e] [-i] [-v]')
-
     #
-    locale = args.locale.replace("_", "-")
-    lang_code = locale.split('-')[0]
-    #
-    profiles_file = os.path.join(
-        _DATA_DIR, f"records.{lang_code}.csv"
-    )
-    dialogues_file = os.path.join(
-        _DATA_DIR, f"dialogues.{lang_code}.tsv"
-    )
     slot_order = [Slot.POSTCODE, Slot.NAME, Slot.DOB]
     #
-    scenario_id2profile = read_profiles(profiles_file)
-    dialogue_id2turns = read_dialogues(dialogues_file)
+    scenario_id2profile, dialogue_id2turns = read_evi_data(locale=args.locale)
     print(f'Read {len(scenario_id2profile)} profiles')
     print(f'Read {len(dialogue_id2turns)} dialogues')
+
     if args.enrolment:
         policy_e = EnrolmentPolicy(
-            nlu=build_nlu(name=args.nlu, locale=locale),
+            nlu=build_nlu(name=args.nlu, locale=args.locale),
             enroller=build_model_e(name=args.model),
             slot_order=slot_order,
         )
@@ -206,11 +196,8 @@ def _main():
                 searchable_by_dob=False,
                 return_all_profiles=False,
             ),
-            nlu=build_nlu(name=args.nlu, locale=locale),
-            identificator=build_model_i(
-                name=args.model,
-                locale=locale
-            ),
+            nlu=build_nlu(name=args.nlu, locale=args.locale),
+            identificator=build_model_i(name=args.model, locale=args.locale),
             slot_order=slot_order,
             eager_identification=args.eager,
             use_db_oracle=args.kbo,
@@ -248,8 +235,8 @@ def _main():
     #
     if args.verification:
         policy_v = VerificationPolicy(
-            nlu=build_nlu(name=args.nlu, locale=locale),
-            verificator=build_model_v(args.model, locale=locale),
+            nlu=build_nlu(name=args.nlu, locale=args.locale),
+            verificator=build_model_v(args.model, locale=args.locale),
             slot_order=slot_order,
             hard_threshold=args.thresh,
         )

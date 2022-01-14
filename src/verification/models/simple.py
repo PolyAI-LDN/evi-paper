@@ -10,7 +10,7 @@ from dataclasses import dataclass, field
 from typing import List, Optional, Tuple
 
 from nlu import NluOutput
-from readers import Profile, Slot
+from data_types import Profile, Slot
 from utils.logic import Logic
 from utils.similarity import BaseScorer
 from verification.models.base import (

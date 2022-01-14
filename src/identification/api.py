@@ -9,7 +9,7 @@ from typing import Dict, List
 
 from numpy.random import RandomState
 
-from readers import Profile, Slot
+from data_types import Profile, Slot
 
 
 def _standardise_postcode(text: str) -> str:

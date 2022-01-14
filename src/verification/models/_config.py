@@ -20,6 +20,7 @@ def build_model_v(name: str, locale: str) -> BaseVerificationModel:
     Returns:
         a verification model
     """
+    locale = locale.replace("_", "-")
     if name == 'random':
         return SimpleVerificationModel(
             postcode_scorer=RandomScorer(),
