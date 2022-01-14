@@ -23,22 +23,18 @@ from verification import (
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        '--locale', type=str, default='en_GB',
+        '--locale', type=str,
         choices={"en_GB", "pl_PL", "fr_FR"},
         help='Locale to evaluate'
     )
     parser.add_argument(
-        '--nlu',
-        default='risk_averse',
-        choices={
-            "risk_averse", "risk_seeking",
-        },
+        '--nlu', type=str,
+        choices={"cautious", "seeking"},
         help='Which NLU model to evaluate'
     )
     parser.add_argument(
-        '--model',
-        type=str, default='exact',
-        choices={"random","exact", "fuzzy"},
+        '--model', type=str,
+        choices={"random", "exact", "fuzzy"},
         help='Which model to evaluate'
     )
     parser.add_argument(

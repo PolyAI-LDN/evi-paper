@@ -21,7 +21,7 @@ def build_nlu(name: str, locale: str) -> Nlu:
         an NLU model
     """
     locale = locale.replace("_", "-")
-    if name == 'risk_averse':
+    if name == 'cautious':
         return Nlu(
             postcode_parser=EviPostcodeParser(
                 locale=locale,
@@ -39,7 +39,7 @@ def build_nlu(name: str, locale: str) -> Nlu:
                 use_nbest=True,
             )
         )
-    elif name == 'risk_seeking':
+    elif name == 'seeking':
         return Nlu(
             postcode_parser=EviPostcodeParser(
                 locale=locale,

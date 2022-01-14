@@ -20,21 +20,17 @@ from evi_dataset import DEFAULT_SLOT_ORDER, read_evi_data
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        '--locale', type=str, default='en_GB',
+        '--locale', type=str,
         choices={"en_GB", "pl_PL", "fr_FR"},
         help='Locale to evaluate'
     )
     parser.add_argument(
-        '--nlu',
-        default='risk_averse',
-        choices={
-            "risk_averse", "risk_seeking",
-        },
+        '--nlu', type=str,
+        choices={"cautious", "seeking"},
         help='Which NLU model to evaluate'
     )
     parser.add_argument(
-        '--model',
-        type=str, default='0',
+        '--model', type=str, default='0',
         choices={"0", "1", "2", "3"},
         help='Which model to evaluate'
     )

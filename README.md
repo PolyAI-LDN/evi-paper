@@ -1,89 +1,68 @@
-## Setup
-Get data from Google storage:
-```
-gsutil -m cp -r gs://poly-data/idnv ../tmp/evi
-```
+# EVI
 
-## Evaluate Enrolment
+## Dataset
 
-```#bash
-python eval_e.py --locale en_GB --nlu risk_averse
+Audios are available here [URL].
 
-python eval_e.py --locale en_GB --nlu risk_seeking
-```
+## Benchmarks
 
-Analysis for single-turn:
-```#bash
-python eval_e.py --locale en_GB --nlu risk_averse --model 1
+Scripts to replicate the results of experiments in the paper.
 
-python eval_e.py --locale en_GB --nlu risk_averse --model 2
-
-python eval_e.py --locale en_GB --nlu risk_averse --model 3
-```
-
-## Evaluate Verification
+### Enrolment Experiments
 
 ```#bash
-python eval_v.py --locale en_GB --nlu risk_averse --model random -p
+python eval_e.py --locale en_GB --nlu cautious
+python eval_e.py --locale en_GB --nlu seeking
+```
 
-python eval_v.py --locale en_GB --nlu risk_averse --model exact -p
+Analysis for multi- vs single-turn:
+```#bash
+python eval_e.py --locale en_GB --nlu cautious --model 0  # multi
+python eval_e.py --locale en_GB --nlu cautious --model 1  # single
+python eval_e.py --locale en_GB --nlu cautious --model 2  # single
+python eval_e.py --locale en_GB --nlu cautious --model 3  # single
+```
 
-python eval_v.py --locale en_GB --nlu risk_averse --model fuzzy -p
+### Verification Experiments
 
-python eval_v.py --locale en_GB --nlu risk_seeking --model random -p
-
-python eval_v.py --locale en_GB --nlu risk_seeking --model exact -p
-
-python eval_v.py --locale en_GB --nlu risk_seeking --model fuzzy -p
+```#bash
+python eval_v.py --locale en_GB --nlu cautious --model random
+python eval_v.py --locale en_GB --nlu cautious --model exact
+python eval_v.py --locale en_GB --nlu cautious --model fuzzy
+python eval_v.py --locale en_GB --nlu seeking --model random
+python eval_v.py --locale en_GB --nlu seeking --model exact
+python eval_v.py --locale en_GB --nlu seeking --model fuzzy
 ```
 
 Early termination:
 ```
-#  same as above with --thresh 0.0,
-using the threshold for the desired security level 
+# same as above with --thresh 0.0,
+# using the threshold for the desired security level 
 ```
 
-## Evaluate Identification
+### Identification Experiments
 
 ```#bash
-
-python eval_i.py --locale en_GB --nlu risk_averse --model none
-
-python eval_i.py --locale en_GB --nlu risk_seeking --model none
-
-python eval_i.py --locale en_GB --nlu risk_averse --model exact-1
-
-python eval_i.py --locale en_GB --nlu risk_averse --model fuzzy-1
-
-python eval_i.py --locale en_GB --nlu risk_seeking --model exact-1
-
-python eval_i.py --locale en_GB --nlu risk_seeking --model fuzzy-1
-
-python eval_i.py --locale en_GB --nlu risk_averse --model exact-0.5
-
-python eval_i.py --locale en_GB --nlu risk_averse --model fuzzy-0.5
-
-python eval_i.py --locale en_GB --nlu risk_seeking --model exact-0.5
-
-python eval_i.py --locale en_GB --nlu risk_seeking --model fuzzy-0.5
-
-python eval_i.py --locale en_GB --nlu risk_averse --model oracle
-
-python eval_i.py --locale en_GB --nlu risk_seeking --model oracle
+python eval_i.py --locale en_GB --nlu cautious --model none
+python eval_i.py --locale en_GB --nlu seeking --model none
+python eval_i.py --locale en_GB --nlu cautious --model exact-1
+python eval_i.py --locale en_GB --nlu cautious --model fuzzy-1
+python eval_i.py --locale en_GB --nlu seeking --model exact-1
+python eval_i.py --locale en_GB --nlu seeking --model fuzzy-1
+python eval_i.py --locale en_GB --nlu cautious --model exact-0.5
+python eval_i.py --locale en_GB --nlu cautious --model fuzzy-0.5
+python eval_i.py --locale en_GB --nlu seeking --model exact-0.5
+python eval_i.py --locale en_GB --nlu seeking --model fuzzy-0.5
+python eval_i.py --locale en_GB --nlu cautious --model oracle
+python eval_i.py --locale en_GB --nlu seeking --model oracle
 ```
 
-
-Oracle for KB:
+Analysis with KB oracle:
 ```#bash
-python eval_i.py --locale en_GB --nlu risk_seeking --model none --kbo
-
-python eval_i.py --locale en_GB --nlu risk_seeking --model exact-1 --kbo
-
-python eval_i.py --locale en_GB --nlu risk_seeking --model fuzzy-1 --kbo
-
-python eval_i.py --locale en_GB --nlu risk_seeking --model exact-0.5 --kbo
-
-python eval_i.py --locale en_GB --nlu risk_seeking --model fuzzy-0.5 --kbo
-
-python eval_i.py --locale en_GB --nlu risk_seeking --model oracle --kbo
+python eval_i.py --locale en_GB --nlu seeking --model none --kbo
+python eval_i.py --locale en_GB --nlu seeking --model exact-1 --kbo
+python eval_i.py --locale en_GB --nlu seeking --model fuzzy-1 --kbo
+python eval_i.py --locale en_GB --nlu seeking --model exact-0.5 --kbo
+python eval_i.py --locale en_GB --nlu seeking --model fuzzy-0.5 --kbo
+python eval_i.py --locale en_GB --nlu seeking --model oracle --kbo
 ```
