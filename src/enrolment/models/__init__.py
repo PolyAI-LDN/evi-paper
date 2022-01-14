@@ -1,0 +1,7 @@
+""" Models for enrolment
+
+Copyright PolyAI Limited
+"""
+# flake8: noqa F401
+from enrolment.models._config import build_model_e
+from enrolment.models.base import BaseEnrolmentModel, BaseEnrolmentState
