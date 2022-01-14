@@ -3,6 +3,7 @@
 Copyright PolyAI Limited
 """
 import re
+from os import path
 from typing import List, Optional, Set, Tuple
 
 import names_dataset
@@ -10,13 +11,27 @@ import names_dataset
 from nlu.interface import AbstractParser
 from nlu.nlu_utils import rm_duplicates, simplify_spelling
 
-#from text.names import name_data
+
+def _read_names(file_name: str) -> Set[str]:
+    file_name = path.join(
+        path.dirname(path.abspath(__file__)),
+        "third_party", "census_data", file_name
+    )
+    out = set()
+    with open(file_name) as f:
+        for line in f:
+            name, _ = line.split()[:2]
+            name = name.upper()
+            out.add(name)
+    return out
 
 
 def _read_census_data() -> Tuple[Set[str], Set[str]]:
-    first2freq, last2freq = {}, {}
-    #first2freq, last2freq = name_data()
-    return set(first2freq.keys()), set(last2freq.keys())
+    first_names = set()
+    first_names = first_names.union(_read_names("dist.female.first"))
+    first_names = first_names.union(_read_names("dist.male.first"))
+    last_names = _read_names("dist.all.last")
+    return first_names, last_names
 
 
 class EviNameParser(AbstractParser):
