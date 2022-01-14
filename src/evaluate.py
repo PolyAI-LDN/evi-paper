@@ -32,7 +32,7 @@ _DATA_DIR = "../data"
 
 def _randomized_verification_attempts(
     dialogue_id2turns: Dict[str, List[Turn]],
-    scenario_id2profile: Dict[str, Profile],g
+    scenario_id2profile: Dict[str, Profile],
     rate_genuine_to_impostor: float,
     seed=123
 ) -> Dict[str, List[str]]:
