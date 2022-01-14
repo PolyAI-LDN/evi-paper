@@ -115,7 +115,7 @@ class EviNameValueExtractor(AbstractValueExtractor):
             names.append((first, last))
         return names
 
-    def parse(  # noqa D003
+    def extract(  # noqa D003
         self,
         text: str,
         flags: Optional[List[str]] = None
@@ -178,10 +178,10 @@ class EviNameValueExtractor(AbstractValueExtractor):
         """ Launch an interactive demo """
         while True:
             text = input(">")
-            outs = self.parse(text, [])
+            outs = self.extract(text, [])
             for i, o in enumerate(outs):
                 print(f'Spelling {i}: {o}')
-            outs = self.parse(text, ['SPELL'])
+            outs = self.extract(text, ['SPELL'])
             for i, o in enumerate(outs):
                 print(f'Value    {i}: {o}')
 

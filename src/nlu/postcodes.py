@@ -28,7 +28,6 @@ def _standardise_postcode(text: str) -> str:
 
 def _validate_postcode(postcode: str, locale: str) -> str:
     """ Format a postcode to valid format (or empty string if invalid)"""
-    # TODO proper postcode validation
     postcode = _standardise_postcode(postcode)
     pattern = _get_postcode_regex(locale)
     if re.fullmatch(pattern, postcode):
@@ -39,7 +38,7 @@ def _validate_postcode(postcode: str, locale: str) -> str:
 class EviPostcodeValueExtractor(AbstractValueExtractor):
     """ Postcode NLU """
 
-    def parse(  # noqa D003
+    def extract(  # noqa D003
         self,
         text: str,
         flags: Optional[List[str]] = None

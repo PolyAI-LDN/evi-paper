@@ -1,4 +1,4 @@
-""" Models for verification scoring
+""" Fuzzy logic to compute profile-level scores from item-level scores
 
 Copyright PolyAI Limited
 """

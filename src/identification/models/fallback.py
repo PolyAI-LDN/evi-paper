@@ -15,7 +15,7 @@ from identification.models.base import (
 )
 from nlu import NluOutput
 from utils.logic import Logic
-from utils.similarity import BaseScorer
+from utils.scoring import BaseScorer
 
 
 @dataclass()

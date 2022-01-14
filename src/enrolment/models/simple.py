@@ -8,10 +8,10 @@ from copy import deepcopy
 from dataclasses import dataclass
 from typing import Optional
 
+from data_types import Profile, Slot
 from enrolment.models.base import BaseEnrolmentModel, BaseEnrolmentState
 from nlu import NluOutput
 from nlu.dates import date_to_str
-from data_types import Profile, Slot
 
 _NEW_ENROLMENT = 'new_enrolment'
 

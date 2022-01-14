@@ -10,10 +10,10 @@ from typing import List, Tuple
 
 import glog
 
+from data_types import Profile, Slot, Turn, filter_turns
 from identification.api import ProfileDatastore
 from identification.models import BaseIdentificationModel
 from nlu import Nlu, NluOutput
-from data_types import Profile, Slot, Turn, filter_turns
 
 _NO_PROFILE = 'Identified.None'
 

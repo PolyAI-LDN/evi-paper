@@ -34,7 +34,11 @@ class AbstractValueExtractor(abc.ABC):
         return self._locale.split('-')[0].lower()
 
     @abc.abstractmethod
-    def parse(self, text: str, flags: Optional[List[str]] = None) -> List[Any]:
+    def extract(
+        self,
+        text: str,
+        flags: Optional[List[str]] = None
+    ) -> List[Any]:
         """ Parse text into a date object
 
         Args:
@@ -43,7 +47,7 @@ class AbstractValueExtractor(abc.ABC):
         """
         raise NotImplementedError()
 
-    def parse_nbest(
+    def extract_nbest(
         self,
         texts: List[str],
         flags: Optional[List[str]] = None
@@ -59,7 +63,7 @@ class AbstractValueExtractor(abc.ABC):
         """
         results = []
         for t in (texts if self._use_nbest else texts[:1]):
-            results.extend(self.parse(text=t, flags=flags))
+            results.extend(self.extract(text=t, flags=flags))
         results = _rm_duplicates(results)
         return results
 

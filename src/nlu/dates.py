@@ -20,7 +20,7 @@ def date_to_str(dob: Optional[dt.date]) -> str:
 class DummyDateValueExtractor(AbstractValueExtractor):
     """ Dummy date NLU that always returns a dummy date """
 
-    def parse(self, text: str) -> List[dt.date]:  # noqa D003
+    def extract(self, text: str) -> List[dt.date]:  # noqa D003
         return [dt.date(2000, 1, 1)]
 
 
@@ -60,7 +60,7 @@ class EviDateValueExtractor(AbstractValueExtractor):
             'RELATIVE_BASE': dt.datetime(2020, 1, 1)
         }
 
-    def parse(  # noqa D003
+    def extract(  # noqa D003
         self,
         text: str,
         flags: Optional[List[str]] = None

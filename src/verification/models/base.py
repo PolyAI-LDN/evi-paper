@@ -1,4 +1,4 @@
-""" Base model for verification
+""" Abstract models for verification
 
 Copyright PolyAI Limited
 """
@@ -7,8 +7,8 @@ from __future__ import annotations
 import abc
 from dataclasses import dataclass
 
-from nlu import NluOutput
 from data_types import Profile
+from nlu import NluOutput
 
 
 class BaseVerificationModel(abc.ABC):

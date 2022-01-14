@@ -1,4 +1,4 @@
-""" Models for verification
+""" Models for the Verification Task
 
 Copyright PolyAI Limited
 """

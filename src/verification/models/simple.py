@@ -1,4 +1,4 @@
-""" Models for verification
+""" Simple model for verification
 
 Copyright PolyAI Limited
 """
@@ -9,10 +9,10 @@ from copy import deepcopy
 from dataclasses import dataclass, field
 from typing import List, Optional, Tuple
 
-from nlu import NluOutput
 from data_types import Profile, Slot
+from nlu import NluOutput
 from utils.logic import Logic
-from utils.similarity import BaseScorer
+from utils.scoring import BaseScorer
 from verification.models.base import (
     BaseVerificationModel, BaseVerificationState
 )

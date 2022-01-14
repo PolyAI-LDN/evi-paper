@@ -1,4 +1,4 @@
-""" Models for verification scoring
+""" Models for item-level verification scores
 
 Copyright PolyAI Limited
 """
@@ -103,6 +103,25 @@ class ConstantScorer(FallbackScorer):
         return self._const
 
 
+class RandomScorer(FallbackScorer):
+    """ A scorer that checks performs random comparison """
+
+    def calc_score_single(  # noqa D003
+        self, hyp: Any, ref: Any,
+    ) -> float:
+        if ref == hyp:
+            return 1.0
+        seed = int(
+            md5(
+                '|'.join([str(ref), str(hyp)]).encode("utf-8")
+            ).hexdigest()[:6],
+            16
+        )
+        rng = RandomState(seed=seed)
+        sim = rng.uniform(0, 1)
+        return sim
+
+
 class ExactScorer(FallbackScorer):
     """ A scorer that checks for equals (==) """
 
@@ -125,23 +144,4 @@ class TextEditScorer(FallbackScorer):
         nom = edit_distance(ref, hyp)
         denom = max(len(ref), len(hyp))
         sim = 1 - nom / denom
-        return sim
-
-
-class RandomScorer(FallbackScorer):
-    """ A scorer that checks performs random comparison """
-
-    def calc_score_single(  # noqa D003
-        self, hyp: Any, ref: Any,
-    ) -> float:
-        if ref == hyp:
-            return 1.0
-        seed = int(
-            md5(
-                '|'.join([str(ref), str(hyp)]).encode("utf-8")
-            ).hexdigest()[:6],
-            16
-        )
-        rng = RandomState(seed=seed)
-        sim = rng.uniform(0, 1)
         return sim

@@ -1,4 +1,4 @@
-""" Data readers
+""" Utils for loading the evi dataset
 
 Copyright PolyAI Limited
 """
@@ -106,7 +106,7 @@ def _read_profiles(
     return scenario_id2profile
 
 
-def read_evi_data(locale: str):
+def load_evi_data(locale: str):
     locale = locale.replace("_", "-")
     lang_code = locale.split('-')[0]
     profiles_file = os.path.join(_DATA_DIR, f"records.{lang_code}.csv")

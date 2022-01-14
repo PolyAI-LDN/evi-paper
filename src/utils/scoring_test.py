@@ -1,4 +1,4 @@
-""" Tests for similarity.py
+""" Tests for scoring.py
 
 
 Copyright PolyAI Limited

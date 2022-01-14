@@ -1,9 +1,4 @@
-""" Run models and evaluations for tasks
-
-python projects/evi/eval_e.py \
-    -eiv \
-    --locale en_GB \
-    --model naive
+""" Simulate genuine and impostor verification attempts
 
 Copyright PolyAI Limited
 """

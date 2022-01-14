@@ -6,8 +6,8 @@ from typing import Dict, List, Tuple
 
 import glog
 
-from enrolment.models.base import BaseEnrolmentModel
 from data_types import Profile, Turn, filter_turns
+from enrolment.models.base import BaseEnrolmentModel
 from nlu import Nlu
 
 

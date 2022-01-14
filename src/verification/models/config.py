@@ -5,7 +5,7 @@ Copyright PolyAI Limited
 from __future__ import annotations
 
 from utils.logic import Logic
-from utils.similarity import ExactScorer, RandomScorer, TextEditScorer
+from utils.scoring import ExactScorer, RandomScorer, TextEditScorer
 from verification.models.base import BaseVerificationModel
 from verification.models.simple import SimpleVerificationModel
 

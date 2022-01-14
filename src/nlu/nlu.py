@@ -2,52 +2,11 @@
 
 Copyright PolyAI Limited
 """
-import datetime as dt
-from dataclasses import dataclass, field
-from typing import List, Tuple
-
 from data_types import Slot, Turn
 from nlu.dates import EviDateValueExtractor
 from nlu.names import EviNameValueExtractor
 from nlu.postcodes import EviPostcodeValueExtractor
-
-
-@dataclass
-class NluOutput(object):
-    """Dataclass for NLU outputs"""
-    texts: List[str] = field(default_factory=lambda: [])
-    postcodes: List[str] = field(default_factory=lambda: [])
-    names: List[Tuple[str, str]] = field(default_factory=lambda: [])
-    dobs: List[dt.date] = field(default_factory=lambda: [])
-
-    def get_first_names(self) -> List[str]:
-        """ a list of extracted first names """
-        first_names = []
-        for first, _ in self.names:
-            if not first:
-                continue
-            first_names.append(first)
-        return first_names
-
-    def get_last_names(self) -> List[str]:
-        """ a list of extracted last names """
-        last_names = []
-        for _, last in self.names:
-            if not last:
-                continue
-            last_names.append(last)
-        return last_names
-
-    def get_full_names(self) -> List[str]:
-        """ a list of extracted full names """
-        full_names = []
-        for first, last in self.names:
-            if not first:
-                continue
-            if not last:
-                continue
-            full_names.append(f"{first} {last}")
-        return full_names
+from nlu.types_ import NluOutput
 
 
 class Nlu(object):
@@ -55,20 +14,20 @@ class Nlu(object):
 
     def __init__(
         self,
-        postcode_parser: EviPostcodeValueExtractor,
-        name_parser: EviNameValueExtractor,
-        date_parser: EviDateValueExtractor,
+        postcode_extractor: EviPostcodeValueExtractor,
+        name_extractor: EviNameValueExtractor,
+        date_extractor: EviDateValueExtractor,
     ):
         """ Initialise
 
         Args:
-            postcode_parser: a PostcodeParser
-            name_parser: a NameParser
-            date_parser: a DateParser
+            postcode_extractor: a PostcodeParser
+            name_extractor: a NameParser
+            date_extractor: a DateParser
         """
-        self._postcode_parser = postcode_parser
-        self._name_parser = name_parser
-        self._date_parser = date_parser
+        self._postcode_extractor = postcode_extractor
+        self._name_extractor = name_extractor
+        self._date_extractor = date_extractor
 
     def run_nlu(
         self,
@@ -92,20 +51,20 @@ class Nlu(object):
         names = []
         dobs = []
 
-        if request_postcode and self._postcode_parser is not None:
+        if request_postcode and self._postcode_extractor is not None:
             postcodes.extend(
-                self._postcode_parser.parse_nbest(texts=turn.nbest)
+                self._postcode_extractor.extract_nbest(texts=turn.nbest)
             )
         if request_name:
             names.extend(
-                self._name_parser.parse_nbest(
+                self._name_extractor.extract_nbest(
                     texts=turn.nbest,
                     flags=['SPELL'] if turn.requested_spelling else []
                 )
             )
         if request_dob:
             dobs.extend(
-                self._date_parser.parse_nbest(texts=turn.nbest)
+                self._date_extractor.extract_nbest(texts=turn.nbest)
             )
 
         out = NluOutput(

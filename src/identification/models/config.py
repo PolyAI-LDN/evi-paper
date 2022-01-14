@@ -7,7 +7,7 @@ from __future__ import annotations
 from identification.models.base import BaseIdentificationModel
 from identification.models.fallback import FallbackIdentificationModel
 from utils.logic import Logic
-from utils.similarity import ConstantScorer, ExactScorer, TextEditScorer
+from utils.scoring import ConstantScorer, ExactScorer, TextEditScorer
 
 
 def build_model_i(name: str, locale: str) -> BaseIdentificationModel:

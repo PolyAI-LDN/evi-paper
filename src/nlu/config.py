@@ -4,7 +4,7 @@ Copyright PolyAI Limited
 """
 from __future__ import annotations
 
-from nlu import Nlu
+from nlu.nlu import Nlu
 from nlu.dates import EviDateValueExtractor
 from nlu.names import EviNameValueExtractor
 from nlu.postcodes import EviPostcodeValueExtractor
@@ -23,17 +23,17 @@ def build_nlu(name: str, locale: str) -> Nlu:
     locale = locale.replace("_", "-")
     if name == 'cautious':
         return Nlu(
-            postcode_parser=EviPostcodeValueExtractor(
+            postcode_extractor=EviPostcodeValueExtractor(
                 locale=locale,
                 strict=True,
                 use_nbest=True,
             ),
-            name_parser=EviNameValueExtractor(
+            name_extractor=EviNameValueExtractor(
                 locale=locale,
                 strict=True,
                 use_nbest=True,
             ),
-            date_parser=EviDateValueExtractor(
+            date_extractor=EviDateValueExtractor(
                 locale=locale,
                 strict=True,
                 use_nbest=True,
@@ -41,17 +41,17 @@ def build_nlu(name: str, locale: str) -> Nlu:
         )
     elif name == 'seeking':
         return Nlu(
-            postcode_parser=EviPostcodeValueExtractor(
+            postcode_extractor=EviPostcodeValueExtractor(
                 locale=locale,
                 strict=False,
                 use_nbest=True,
             ),
-            name_parser=EviNameValueExtractor(
+            name_extractor=EviNameValueExtractor(
                 locale=locale,
                 strict=False,
                 use_nbest=True,
             ),
-            date_parser=EviDateValueExtractor(
+            date_extractor=EviDateValueExtractor(
                 locale=locale,
                 strict=False,
                 use_nbest=True,

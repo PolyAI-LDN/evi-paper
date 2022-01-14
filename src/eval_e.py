@@ -14,7 +14,7 @@ import glog
 
 from enrolment import EnrolmentEvaluator, EnrolmentPolicy, build_model_e
 from nlu import build_nlu
-from evi_dataset import DEFAULT_SLOT_ORDER, read_evi_data
+from evi_dataset import DEFAULT_SLOT_ORDER, load_evi_data
 
 
 def parse_args():
@@ -46,7 +46,7 @@ def _main():
     args = parse_args()
     slot_order = DEFAULT_SLOT_ORDER
     #
-    scenario_id2profile, dialogue_id2turns = read_evi_data(locale=args.locale)
+    scenario_id2profile, dialogue_id2turns = load_evi_data(locale=args.locale)
     print(f'Read {len(scenario_id2profile)} profiles')
     print(f'Read {len(dialogue_id2turns)} dialogues')
 
