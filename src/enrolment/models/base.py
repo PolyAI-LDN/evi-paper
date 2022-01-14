@@ -1,4 +1,4 @@
-""" Models for enrolment
+""" Abstract models for enrolment
 
 Copyright PolyAI Limited
 """
@@ -9,8 +9,8 @@ from copy import deepcopy
 from dataclasses import dataclass, field
 from typing import Dict
 
-from nlu import NluOutput
 from data_types import Profile
+from nlu import NluOutput
 
 
 class BaseEnrolmentModel(abc.ABC):

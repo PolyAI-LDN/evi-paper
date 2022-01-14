@@ -1,4 +1,4 @@
-""" Evaluators for tasks
+""" Evaluator for enrolment
 
 Copyright PolyAI Limited
 """

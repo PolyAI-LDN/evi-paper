@@ -1,4 +1,4 @@
-""" Models for identification
+""" Models for the Identification Task
 
 Copyright PolyAI Limited
 """

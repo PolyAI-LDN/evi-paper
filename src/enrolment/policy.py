@@ -7,8 +7,8 @@ from typing import Dict, List, Tuple
 import glog
 
 from enrolment.models.base import BaseEnrolmentModel
-from nlu import Nlu
 from data_types import Profile, Turn, filter_turns
+from nlu import Nlu
 
 
 class EnrolmentPolicy(object):

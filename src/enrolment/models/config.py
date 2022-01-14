@@ -11,11 +11,13 @@ from enrolment.models.simple import SimpleEnrolmentModel
 def build_model_e(name: str) -> BaseEnrolmentModel:
     """ Create a new enrolment model """
     name = name.strip()
-    if name in {'0', 'naive', 'basic'}:
-        focus_attempt = None
+    if name == '0':
+        return SimpleEnrolmentModel(
+            focus_attempt=None
+        )
+    elif name in {'1', '2', '3'}:
+        return SimpleEnrolmentModel(
+            focus_attempt=1
+        )
     else:
-        focus_attempt = int(name)
-        assert 1 <= focus_attempt <= 3
-    return SimpleEnrolmentModel(
-        focus_attempt=focus_attempt
-    )
+        raise NotImplementedError(f'No enrolment model {name}')

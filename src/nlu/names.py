@@ -1,4 +1,4 @@
-""" NLU and utils for names
+""" Value extraction for names
 
 Copyright PolyAI Limited
 """
@@ -8,8 +8,8 @@ from typing import List, Optional, Set, Tuple
 
 import names_dataset
 
-from nlu.interface import AbstractParser
-from nlu.nlu_utils import rm_duplicates, simplify_spelling
+from nlu.interface import AbstractValueExtractor
+from utils.spelling import normalise_spellings
 
 
 def _read_names(file_name: str) -> Set[str]:
@@ -34,7 +34,7 @@ def _read_census_data() -> Tuple[Set[str], Set[str]]:
     return first_names, last_names
 
 
-class EviNameParser(AbstractParser):
+class EviNameValueExtractor(AbstractValueExtractor):
     """ Trivial name NLU """
 
     def __init__(
@@ -153,11 +153,10 @@ class EviNameParser(AbstractParser):
                     first = tokens[i]
                     last = tokens[j]
                     names.append((first, last))
-        names = rm_duplicates(names)
         return names
 
     def _parse_spelling(self, text: str) -> List[Tuple[str, str]]:
-        text = simplify_spelling(text)
+        text = normalise_spellings(text)
         #
         # exact match
         names = []
@@ -186,11 +185,6 @@ class EviNameParser(AbstractParser):
             for i, o in enumerate(outs):
                 print(f'Value    {i}: {o}')
 
-
-# m = EviNameParser(locale="en-GB", strict=True)._parse_spelling("JOHNLENNON")
-# print(m)
-#
-# exit()
 
 if __name__ == '__main__':
     print("Done!")

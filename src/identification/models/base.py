@@ -1,4 +1,4 @@
-""" Models for identification
+""" Abstract models for identification
 
 Copyright PolyAI Limited
 """

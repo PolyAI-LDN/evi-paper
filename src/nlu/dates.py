@@ -1,4 +1,4 @@
-""" NLU and utils for dates
+""" Value extraction for dates
 
 Copyright PolyAI Limited
 """
@@ -9,7 +9,7 @@ import dateparser
 from dateparser.search import search_dates
 from dateparser_data.settings import default_parsers
 
-from nlu.interface import AbstractParser
+from nlu.interface import AbstractValueExtractor
 
 
 def date_to_str(dob: Optional[dt.date]) -> str:
@@ -17,14 +17,14 @@ def date_to_str(dob: Optional[dt.date]) -> str:
     return dob.isoformat() if dob is not None else ''
 
 
-class DummyDateParser(AbstractParser):
+class DummyDateValueExtractor(AbstractValueExtractor):
     """ Dummy date NLU that always returns a dummy date """
 
     def parse(self, text: str) -> List[dt.date]:  # noqa D003
         return [dt.date(2000, 1, 1)]
 
 
-class EviDateParser(AbstractParser):
+class EviDateValueExtractor(AbstractValueExtractor):
     """ Simple date NLU """
 
     def __init__(

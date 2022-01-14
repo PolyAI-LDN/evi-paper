@@ -7,10 +7,8 @@ from __future__ import annotations
 import abc
 from typing import Any, List, Optional
 
-from nlu.nlu_utils import rm_duplicates
 
-
-class AbstractParser(abc.ABC):
+class AbstractValueExtractor(abc.ABC):
     """ Abstract class for NLU extractors """
 
     def __init__(
@@ -62,5 +60,24 @@ class AbstractParser(abc.ABC):
         results = []
         for t in (texts if self._use_nbest else texts[:1]):
             results.extend(self.parse(text=t, flags=flags))
-        results = rm_duplicates(results)
+        results = _rm_duplicates(results)
         return results
+
+
+def _rm_duplicates(alist: List[Any]) -> List[Any]:
+    """ Remove duplicates from a list
+
+    Args:
+        alist: the input list
+
+    Returns:
+        a copy of the list with any duplicates removed
+    """
+    aset = set()
+    res = []
+    for a in alist:
+        if a in aset:
+            continue
+        res.append(a)
+        aset.add(a)
+    return res

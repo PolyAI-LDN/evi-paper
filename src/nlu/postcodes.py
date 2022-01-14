@@ -1,12 +1,12 @@
-""" NLU and utils for postcodes
+""" Value extraction for postcodes
 
 Copyright PolyAI Limited
 """
 import re
 from typing import List, Optional
 
-from nlu.interface import AbstractParser
-from nlu.nlu_utils import simplify_spelling
+from nlu.interface import AbstractValueExtractor
+from utils.spelling import normalise_spellings
 
 
 def _get_postcode_regex(locale: str):
@@ -36,7 +36,7 @@ def _validate_postcode(postcode: str, locale: str) -> str:
     return ''
 
 
-class EviPostcodeParser(AbstractParser):
+class EviPostcodeValueExtractor(AbstractValueExtractor):
     """ Postcode NLU """
 
     def parse(  # noqa D003
@@ -45,7 +45,7 @@ class EviPostcodeParser(AbstractParser):
         flags: Optional[List[str]] = None
     ) -> List[str]:
         postcodes = []
-        text = simplify_spelling(text, locale=self._locale)
+        text = normalise_spellings(text, locale=self._locale)
         pattern = _get_postcode_regex(locale=self._locale)
         #
         # exact match

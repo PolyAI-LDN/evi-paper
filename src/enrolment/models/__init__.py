@@ -1,4 +1,4 @@
-""" Models for enrolment
+""" Models for the Enrolment Task
 
 Copyright PolyAI Limited
 """

@@ -1,4 +1,4 @@
-""" Models for enrolment
+""" Simple model for enrolment
 
 Copyright PolyAI Limited
 """

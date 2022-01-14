@@ -6,10 +6,10 @@ import datetime as dt
 from dataclasses import dataclass, field
 from typing import List, Tuple
 
-from nlu.dates import EviDateParser
-from nlu.names import EviNameParser
-from nlu.postcodes import EviPostcodeParser
 from data_types import Slot, Turn
+from nlu.dates import EviDateValueExtractor
+from nlu.names import EviNameValueExtractor
+from nlu.postcodes import EviPostcodeValueExtractor
 
 
 @dataclass
@@ -55,9 +55,9 @@ class Nlu(object):
 
     def __init__(
         self,
-        postcode_parser: EviPostcodeParser,
-        name_parser: EviNameParser,
-        date_parser: EviDateParser,
+        postcode_parser: EviPostcodeValueExtractor,
+        name_parser: EviNameValueExtractor,
+        date_parser: EviDateValueExtractor,
     ):
         """ Initialise
 

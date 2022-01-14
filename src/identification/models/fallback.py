@@ -1,4 +1,4 @@
-""" Models for identification
+""" Simple model for identification
 
 Copyright PolyAI Limited
 """
@@ -9,11 +9,11 @@ from copy import deepcopy
 from dataclasses import dataclass, field
 from typing import List, Tuple
 
+from data_types import Profile, Slot
 from identification.models.base import (
     BaseIdentificationModel, BaseIdentificationState
 )
 from nlu import NluOutput
-from data_types import Profile, Slot
 from utils.logic import Logic
 from utils.similarity import BaseScorer
 

@@ -26,7 +26,6 @@ def build_model_i(name: str, locale: str) -> BaseIdentificationModel:
         name = "exact-1"
     elif name in {"none"}:
         name = "none-1"
-    print(name)
     name, alpha = name.split("-")
     alpha = float(alpha)
     #

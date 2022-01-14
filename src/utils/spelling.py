@@ -1,11 +1,11 @@
-""" Utils for NLU
+""" Utils for normalising spelling
 
 Copyright PolyAI Limited
 """
 import re
 from collections import OrderedDict
 from functools import lru_cache
-from typing import Any, Dict, List
+from typing import Dict, List
 
 from num2words import num2words
 
@@ -71,8 +71,16 @@ def _get_num2aliases(locale: str = "en-GB") -> Dict[str, List[str]]:
     return num2aliases
 
 
-def simplify_spelling(text: str, locale: str = "en-GB") -> str:
-    """ Normalise spelling
+def _is_spelling(text: str) -> bool:
+    return all(
+        (c.isalpha() and c.isupper())
+        or not c.isalpha()
+        for c in text
+    )
+
+
+def normalise_spellings(text: str, locale: str = "en-GB") -> str:
+    """ Preprocess text to normalise spellings and numbers
 
     Args:
         text: the original text
@@ -143,30 +151,3 @@ def simplify_spelling(text: str, locale: str = "en-GB") -> str:
         if not (_is_spelling(word) and _is_spelling(next_word)):
             text += " "
     return text
-
-
-def _is_spelling(text: str) -> bool:
-    return all(
-        (c.isalpha() and c.isupper())
-        or not c.isalpha()
-        for c in text
-    )
-
-
-def rm_duplicates(alist: List[Any]) -> List[Any]:
-    """ Remove duplicates from a list
-
-    Args:
-        alist: the input list
-
-    Returns:
-        a copy of the list with any duplicates removed
-    """
-    aset = set()
-    res = []
-    for a in alist:
-        if a in aset:
-            continue
-        res.append(a)
-        aset.add(a)
-    return res
