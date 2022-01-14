@@ -23,7 +23,6 @@ class SimpleEnrolmentState(BaseEnrolmentState):
     extracted_name_first: str = ''
     extracted_name_last: str = ''
     extracted_dob: str = ''
-    extracted_floa: str = ''
 
 
 class SimpleEnrolmentModel(BaseEnrolmentModel):
@@ -81,14 +80,6 @@ class SimpleEnrolmentModel(BaseEnrolmentModel):
                 dates.append(d)
             if dates:
                 state.extracted_dob = dates[0]
-        elif item == Slot.ADDRESS:
-            floas = []
-            for a in parsed.floas:
-                a = a.strip()
-                if a:
-                    floas.append(a)
-            if floas:
-                state.extracted_floa = floas[0]
         else:
             raise ValueError(f"Unknown item {item}")
         return state
@@ -113,8 +104,6 @@ class SimpleEnrolmentModel(BaseEnrolmentModel):
             )
         elif item == Slot.DOB:
             return bool(state.extracted_dob)
-        elif item == Slot.ADDRESS:
-            return bool(state.extracted_floa)
         else:
             raise ValueError(f"Unknown item {item}")
 
@@ -128,5 +117,4 @@ class SimpleEnrolmentModel(BaseEnrolmentModel):
             name_first=state.extracted_name_first,
             name_last=state.extracted_name_last,
             dob_str=state.extracted_dob,
-            address_first_line=state.extracted_floa,
         )

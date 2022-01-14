@@ -5,7 +5,6 @@ Copyright PolyAI Limited
 from __future__ import annotations
 
 from nlu import Nlu
-from nlu.address import AddressParser
 from nlu.dates import EviDateParser
 from nlu.names import EviNameParser
 from nlu.postcodes import EviPostcodeParser
@@ -37,8 +36,7 @@ def build_nlu(name: str, locale: str) -> Nlu:
                 locale=locale,
                 strict=True,
                 use_nbest=True,
-            ),
-            address_parser=AddressParser.create("trivial"),
+            )
         )
     elif name == 'risk_seeking':
         return Nlu(
@@ -56,8 +54,7 @@ def build_nlu(name: str, locale: str) -> Nlu:
                 locale=locale,
                 strict=False,
                 use_nbest=True,
-            ),
-            address_parser=AddressParser.create("simple"),
+            )
         )
     else:
         raise NotImplementedError(f'No NLU Model {name}')

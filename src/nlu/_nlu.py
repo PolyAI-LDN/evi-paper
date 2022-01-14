@@ -4,9 +4,8 @@ Copyright PolyAI Limited
 """
 import datetime as dt
 from dataclasses import dataclass, field
-from typing import List, Optional, Tuple
+from typing import List, Tuple
 
-from nlu.address import AddressParser
 from nlu.dates import EviDateParser
 from nlu.names import EviNameParser
 from nlu.postcodes import EviPostcodeParser
@@ -20,9 +19,6 @@ class NluOutput(object):
     postcodes: List[str] = field(default_factory=lambda: [])
     names: List[Tuple[str, str]] = field(default_factory=lambda: [])
     dobs: List[dt.date] = field(default_factory=lambda: [])
-    floas: List[str] = field(default_factory=lambda: [])
-    street_nums: List[str] = field(default_factory=lambda: [])
-    street_names: List[str] = field(default_factory=lambda: [])
 
     def get_first_names(self) -> List[str]:
         """ a list of extracted first names """
@@ -62,7 +58,6 @@ class Nlu(object):
         postcode_parser: EviPostcodeParser,
         name_parser: EviNameParser,
         date_parser: EviDateParser,
-        address_parser: Optional[AddressParser] = None,
     ):
         """ Initialise
 
@@ -70,12 +65,10 @@ class Nlu(object):
             postcode_parser: a PostcodeParser
             name_parser: a NameParser
             date_parser: a DateParser
-            address_parser: a AddressParser (or None)
         """
         self._postcode_parser = postcode_parser
         self._name_parser = name_parser
         self._date_parser = date_parser
-        self._address_parser = address_parser
 
     def run_nlu(
         self,
@@ -83,7 +76,6 @@ class Nlu(object):
         request_postcode: bool = False,
         request_name: bool = False,
         request_dob: bool = False,
-        request_floa: bool = False,
     ) -> NluOutput:
         """Execute NLU on a turn
 
@@ -92,7 +84,6 @@ class Nlu(object):
             request_postcode: whether to parse postcodes
             request_name: whether to parse names
             request_dob: whether to parse DOBs
-            request_floa: whether to parse FLOAs
 
         Returns:
             an NluOutput
@@ -100,9 +91,6 @@ class Nlu(object):
         postcodes = []
         names = []
         dobs = []
-        floas = []
-        street_nums = []
-        street_names = []
 
         if request_postcode and self._postcode_parser is not None:
             postcodes.extend(
@@ -119,25 +107,12 @@ class Nlu(object):
             dobs.extend(
                 self._date_parser.parse_nbest(texts=turn.nbest)
             )
-        if request_floa:
-            for floa, num, street in self._address_parser.parse_nbest(
-                texts=turn.nbest
-            ):
-                if floa:
-                    floas.append(floa)
-                if num:
-                    street_nums.append(num)
-                if street:
-                    street_names.append(street)
 
         out = NluOutput(
             texts=turn.nbest,
             postcodes=postcodes,
             names=names,
             dobs=dobs,
-            floas=floas,
-            street_names=street_names,
-            street_nums=street_nums,
         )
         return out
 
@@ -161,7 +136,5 @@ class Nlu(object):
             return self.run_nlu(turn=turn, request_name=True)
         elif item == Slot.DOB:
             return self.run_nlu(turn=turn, request_dob=True)
-        elif item == Slot.ADDRESS:
-            return self.run_nlu(turn=turn, request_floa=True)
         else:
             raise ValueError(f"Unknown item {item}")

@@ -203,7 +203,6 @@ def _main():
                 searchable_by_postcode=True,
                 searchable_by_name=False,
                 searchable_by_dob=False,
-                searchable_by_floa=True,
                 return_all_profiles=False,
             ),
             nlu=build_nlu(name=args.nlu, locale=locale),

@@ -87,9 +87,6 @@ class IdentificationPolicy(object):
         elif item == Slot.DOB:
             for hyp in parsed.dobs:
                 profiles.extend(self._db.find_by_dob(hyp))
-        elif item == Slot.ADDRESS:
-            for hyp in parsed.floas:
-                profiles.extend(self._db.find_by_floa(hyp))
         else:
             raise ValueError(f"Unknown item {item}")
         return profiles

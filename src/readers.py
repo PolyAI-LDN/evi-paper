@@ -23,9 +23,6 @@ class Slot:
     POSTCODE = "postcode"
     NAME = "name"
     DOB = "dob"
-    EMAIL = "email"
-    ZIPCODE = "zipcode"
-    ADDRESS = "address"
 
 
 @dataclass()
@@ -36,9 +33,6 @@ class Profile(object):
     name_first: str
     name_last: str
     dob_str: str  # date in iso format YYYY-MM-DD
-    email: Optional[str] = None
-    address_first_line: Optional[str] = None
-    zipcode: Optional[str] = None
 
     def has(self, item: str) -> bool:
         """ Whether a profile's slot is populated """
@@ -48,10 +42,6 @@ class Profile(object):
             return bool(self.dob_str)
         elif item == Slot.POSTCODE:
             return bool(self.postcode)
-        elif item == Slot.EMAIL:
-            return bool(self.email)
-        elif item == Slot.ADDRESS:
-            return bool(self.address_first_line)
         else:
             raise ValueError(f"Unknown item {item}")
 
@@ -63,25 +53,6 @@ class Profile(object):
             return self.dob_str
         elif item == Slot.POSTCODE:
             return self.postcode.replace(' ', '').replace('-', '').upper()
-        elif item == Slot.EMAIL:
-            return self.email.lower()
-        elif item == Slot.ADDRESS:
-            return self.address_first_line
-            #
-            # for viasat eval we used the following,
-            # commented out to avoid a circular dependency
-            #
-            # from projects.evi.nlu.address import AddressParser
-            #
-            # _ADDR_PARSER = AddressParser.create("simple")
-            #
-            # try:
-            #     _, num, street = _ADDR_PARSER.parse(
-            #         self.address_first_line
-            #     )[0]
-            # except Exception:
-            #     num, street = self.scenario_id, self.scenario_id
-            # return ' '.join([num, street]).lower()
         else:
             raise ValueError(f"Unknown item {item}")
 
@@ -177,16 +148,6 @@ def read_dialogues(
         idx: sorted(turns, key=lambda t: t.turn_num)
         for idx, turns in dialogue_id2turns.items()
     }
-    # if is_viasat:
-    #     dialogue_id2turns = {
-    #         idx: turns
-    #         for idx, turns in dialogue_id2turns.items()
-    #         if (
-    #             any(t.item == 'postcode' for t in turns)
-    #             and any(t.item == 'address' for t in turns)
-    #             and any(t.item == 'name' for t in turns)
-    #         )
-    #     }
     glog.info(f'Loaded {len(dialogue_id2turns)} dialogues')
     glog.warn(
         f'{n_no_targets} dialogues with NO targets (set as None)'
@@ -221,12 +182,9 @@ def read_profiles(
             p = Profile(
                 scenario_id=dictrow['scenario_id'],
                 postcode=dictrow['postcode'],
-                zipcode=dictrow['postcode'],
                 name_first=dictrow['name_first'],
                 name_last=dictrow['name_last'],
                 dob_str=dictrow['dob'],
-                email=dictrow.get('email', None),
-                address_first_line=dictrow.get('address', ''),
             )
             scenario_id2profile[p.scenario_id] = p
     glog.info(f'Loaded {len(scenario_id2profile)} profiles')
