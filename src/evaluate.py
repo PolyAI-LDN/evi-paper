@@ -16,22 +16,23 @@ from typing import Dict, List
 import glog
 from numpy.random import RandomState
 
-from enrolment import EnrolmentPolicy, build_model_e
-from evaluators import (
-    EnrolmentEvaluator, IdentificationEvaluator, VerificationEvaluator
+from enrolment import EnrolmentEvaluator, EnrolmentPolicy, build_model_e
+from identification import (
+    IdentificationEvaluator, IdentificationPolicy, ProfileDatastore,
+    build_model_i
 )
-from identification import IdentificationPolicy, build_model_i
-from identification.api import ProfileDatastore
 from nlu import build_nlu
 from readers import Profile, Slot, Turn, read_dialogues, read_profiles
-from verification import VerificationPolicy, build_model_v
+from verification import (
+    VerificationEvaluator, VerificationPolicy, build_model_v
+)
 
 _DATA_DIR = "../data"
 
 
 def _randomized_verification_attempts(
     dialogue_id2turns: Dict[str, List[Turn]],
-    scenario_id2profile: Dict[str, Profile],
+    scenario_id2profile: Dict[str, Profile],g
     rate_genuine_to_impostor: float,
     seed=123
 ) -> Dict[str, List[str]]:
