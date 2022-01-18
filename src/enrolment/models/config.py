@@ -17,7 +17,7 @@ def build_model_e(name: str) -> BaseEnrolmentModel:
         )
     elif name in {'1', '2', '3'}:
         return SimpleEnrolmentModel(
-            focus_attempt=float(name)
+            focus_attempt=int(name)
         )
     else:
         raise NotImplementedError(f'No enrolment model {name}')
