@@ -18,7 +18,7 @@ for spoken dialogue systems.
 The data include the ASR n-best list transcriptions 
 and can be used to replicate the results in the paper.
 
-Raw audios are available [here](s3://poly-public-data/evi-paper/audios.zip),
+Raw audios are available to download [here](https://poly-public-data.s3.eu-west-2.amazonaws.com/evi-paper/audios.zip),
 in case you want to experiment with different ASR systems.
 
 ## Benchmarks
