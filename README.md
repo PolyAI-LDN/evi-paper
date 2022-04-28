@@ -26,7 +26,16 @@ in case you want to experiment with different ASR systems.
 This repo includes all scripts
 to replicate the results of experiments in the paper.
 
-The scripts are compatible with `python 3.9`.
+### Setup
+
+The following scripts assume `python 3.9`.
+
+Install all requirments:
+
+```
+pip install -r requirements.txt
+```
+
 
 ### Enrolment Experiments
 
