@@ -21,14 +21,14 @@ and can be used to replicate the results in the paper.
 
 |             | counts (unique) | en-GB | pl-PL | fr-FR |
 |------------:|----------------:|------:|------:|------:|
-|             |\#profiles       | 10,000|10,000 | 10,000|
-|             |\#postcodes      |2,000  |2,000  |2,000  |
-|**Knowledge**|\#names(first)   | 364   |153    |216    |
-|**Base**     |\#names(last)    | 500   |3,455  |400    |
+|**Knowledge**|\#profiles       | 10,000|10,000 | 10,000|
+|**Base**     |\#postcodes      |2,000  |2,000  |2,000  |
+|             |\#names(first)   | 364   |153    |216    |
+|             |\#names(last)    | 500   |3,455  |400    |
 |             |\#names(full)    | 9,412 |9,923  |9,433  |
 |    _________|\#DoBs           | 8,884 |8,862  |8,862  |
-|             |\#dialogues      |1,407  |1,991  |2,108  |
-|**Dialogues**|\#turns          | 12,663|17,919 |18,972 |
+|**Dialogues**|\#dialogues      |1,407  |1,991  |2,108  |
+|             |\#turns          | 12,663|17,919 |18,972 |
 |             |\#speakers       |1,081  |803    | 521   |
 |             |\#profiles       |886    | 961   |1,464  |
 
