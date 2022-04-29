@@ -3,7 +3,7 @@
 # EVI
 
 This repo contains the code and data
-of the [paper](https://arxiv.org/pdf/):
+of the [paper](https://arxiv.org/abs/2204.13496):
 
 *EVI: Multilingual Spoken Dialogue Tasks and Dataset for
 Knowledge-Based Enrolment, Verification, and Identification*
@@ -99,7 +99,7 @@ python eval_i.py --locale en_GB --nlu seeking --model oracle --kbo
 ## Citations
 
 When using this dataset in your work,
-please cite our [paper](https://arxiv.org/pdf/):
+please cite our [paper](https://arxiv.org/abs/2204.13496):
 
 *EVI: Multilingual Spoken Dialogue Tasks and Dataset for
 Knowledge-Based Enrolment, Verification, and Identification*
