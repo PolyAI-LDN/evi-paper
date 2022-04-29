@@ -10,13 +10,27 @@ Knowledge-Based Enrolment, Verification, and Identification*
 
 ## Dataset
 
-This repo contains a challenging spoken multilingual dataset
+This repo contains a challenging spoken multilingual [dataset](/data)
 with 5,506 dialogues in English, Polish, and French
 that can be used for benchmarking and developing
 knowledge-based enrolment, identification, and identification
 for spoken dialogue systems.
 The data include the ASR n-best list transcriptions 
 and can be used to replicate the results in the paper.
+
+
+|             | counts (unique) | en-GB | pl-PL | fr-FR |
+|------------:|----------------:|------:|------:|------:|
+|             |\#profiles       | 10,000|10,000 | 10,000|
+|             |\#postcodes      |2,000  |2,000  |2,000  |
+|**Knowledge**|\#names(first)   | 364   |153    |216    |
+|**Base**     |\#names(last)    | 500   |3,455  |400    |
+|             |\#names(full)    | 9,412 |9,923  |9,433  |
+|    _________|\#DoBs           | 8,884 |8,862  |8,862  |
+|             |\#dialogues      |1,407  |1,991  |2,108  |
+|**Dialogues**|\#turns          | 12,663|17,919 |18,972 |
+|             |\#speakers       |1,081  |803    | 521   |
+|             |\#profiles       |886    | 961   |1,464  |
 
 Raw audios are available to download [here](https://poly-public-data.s3.eu-west-2.amazonaws.com/evi-paper/audios.zip),
 in case you want to experiment with different ASR systems.
