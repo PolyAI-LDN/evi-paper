@@ -103,7 +103,7 @@ please cite our [paper](https://arxiv.org/abs/2204.13496):
 
 ```bibtex
 @inproceedings{Spithourakis2022evi,
-    author      = {Georgios P. Spithourakis and Ivan Vuli\'{c}} and Micha\l{} Lis and I\~{n}igo Casanueva and Pawe\l{} Budzianowski},
+    author      = {Georgios P. Spithourakis and Ivan Vuli\'{c} and Micha\l{} Lis and I\~{n}igo Casanueva and Pawe\l{} Budzianowski},
     title       = {{EVI}: Multilingual Spoken Dialogue Tasks and Dataset for Knowledge-Based Enrolment, Verification, and Identification},
     year        = {2022},
     note        = {Data available at https://github.com/PolyAI-LDN/evi-paper},
