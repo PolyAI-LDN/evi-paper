@@ -11,7 +11,7 @@ from utils.spelling import normalise_spellings
 
 def _get_postcode_regex(locale: str):
     if locale == 'en-GB':
-        return r'([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})'  # noqa
+        return r'([Gg][Ii][Rr]\s?0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})'  # noqa
     elif locale == 'en-US':
         return r'(^\d{5}$)|(^\d{9}$)|(^\d{5}-\d{4}$)'
     elif locale == 'pl-PL':
