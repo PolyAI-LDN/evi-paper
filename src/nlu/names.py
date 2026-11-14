@@ -156,7 +156,7 @@ class EviNameValueExtractor(AbstractValueExtractor):
         return names
 
     def _parse_spelling(self, text: str) -> List[Tuple[str, str]]:
-        text = normalise_spellings(text)
+        text = normalise_spellings(text, locale=self._locale)
         #
         # exact match
         names = []
