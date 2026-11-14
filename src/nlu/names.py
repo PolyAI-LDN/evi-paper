@@ -127,14 +127,13 @@ class EviNameValueExtractor(AbstractValueExtractor):
             return self._parse_value(text)
 
     def _parse_value(self, text: str) -> List[Tuple[str, str]]:
-        if not self._is_full_name(text):
-            return []
         names = []
         #
         # exact match
-        for first, last in self._split_full_text(text):
-            if first and last:
-                names.append((first, last))
+        if self._is_full_name(text):
+            for first, last in self._split_full_text(text):
+                if first and last:
+                    names.append((first, last))
         #
         # search within context
         if not self._strict:
