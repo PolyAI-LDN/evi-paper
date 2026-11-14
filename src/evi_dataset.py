@@ -16,7 +16,7 @@ import glog
 from data_types import Profile, Slot, Turn
 
 
-_DATA_DIR = "../data"
+_DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data")
 
 DEFAULT_SLOT_ORDER = [Slot.POSTCODE, Slot.NAME, Slot.DOB]
 
